@@ -42,13 +42,13 @@ public:
     void set_value(std::size_t i, std::size_t j, DataType n) {
         std::size_t N = get_size();
         if (i > N || j > N) {
-            throw std::out_of_range("Index out of range.")
+            throw std::out_of_range("Index out of range.");
         }
         matrix[i][j] = n;
     }
     DataType get_value(std::size_t i, std::size_t j) const {
         if (i > N || j > N) {
-            throw std::out_of_range("Index out of range.")
+            throw std::out_of_range("Index out of range.");
         }
         return matrix[i][j];
     }
