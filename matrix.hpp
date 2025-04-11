@@ -9,12 +9,14 @@
 template <typename DataType>
 class Matrix {
 private:
+    // initializes matrix and size variables for Matrix class
     std::vector<std::vector<DataType>> matrix;
     std::size_t size;
 public:
+    // constructor for matrix taking N to be empty, and Matrix of 2D vector being filled with 2D vector
     Matrix(std::size_t N) : size(N), matrix(N, std::vector<DataType>(N,0)) {}
     Matrix(std::vector<std::vector<DataType>> nums) : size(nums.size()), matrix(nums) {} 
-
+    // additon operator based on sum of values at same position
     Matrix operator+(const Matrix &rhs) const {
         std::size_t N = get_size();
         Matrix additionMatrix(N);
@@ -25,6 +27,7 @@ public:
         }
         return additionMatrix;
     }
+    // mulitplication operator to be dot product of two matrices
     Matrix operator*(const Matrix &rhs) const {
         std::size_t N = get_size();
         Matrix multipliedMatrix(N);
@@ -39,6 +42,7 @@ public:
         }
         return multipliedMatrix;
     }
+    // throws error if setting value out of bounds, or sets value at correct position
     void set_value(std::size_t i, std::size_t j, DataType n) {
         std::size_t N = get_size();
         if (i > N || j > N) {
@@ -46,6 +50,7 @@ public:
         }
         matrix[i][j] = n;
     }
+    // produces a value at correct position if not out of bounds
     DataType get_value(std::size_t i, std::size_t j) const {
         std::size_t N = get_size();
         if (i > N || j > N) {
@@ -53,9 +58,11 @@ public:
         }
         return matrix[i][j];
     }
+    // returns size of matrix
     std::size_t get_size() const {
         return size;
     }
+    // sums values diagonally from left to right top to bottom
     DataType sum_diagonal_major() const {
         std::size_t N = get_size();
         DataType sum = 0;
@@ -64,6 +71,7 @@ public:
         }
         return sum;
     }
+    // sums values diagonally from right to left top to bottom
     DataType sum_diagonal_minor() const {
         std::size_t N = get_size();
         DataType sum = 0;
@@ -72,11 +80,13 @@ public:
         }
         return sum;
     }
+    // swaps two rows using temp vector value
     void swap_rows(std::size_t r1, std::size_t r2) {
         std::vector<DataType> tmp = matrix[r1];
         matrix[r1] = matrix[r2];
         matrix[r2] = tmp;
     }
+    // swaps columns using temp place holder and iterates through rows
     void swap_cols(std::size_t c1, std::size_t c2) {
         std::size_t N = get_size();
         for (size_t i = 0; i < N; i++) {
@@ -85,6 +95,7 @@ public:
             matrix[i][c2] = tmp;
         }
     }
+    // prints values in matrix
     void print_matrix() const {
         std::size_t N = get_size();
         for (size_t i = 0; i < N; i++) {
